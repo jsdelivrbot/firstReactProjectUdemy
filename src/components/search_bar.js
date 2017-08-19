@@ -4,8 +4,14 @@ import React, { Component } from 'react';
 //needs to return GSX-->render()
 //every class contains render method
 class SearchBar extends Component {
+    constructor(props) {
+        //here we define the state -->super : calls the parent method on the parent class.
+        super(props);
+        this.state = { term: '' };
+    }
     render() {
-        return <input />;
+        //add event handler using es6
+        return <input onChange={event => console.log(event.target.value)} />;
     }
 }
 
