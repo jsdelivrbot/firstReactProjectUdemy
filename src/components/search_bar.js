@@ -6,12 +6,22 @@ import React, { Component } from 'react';
 class SearchBar extends Component {
     constructor(props) {
         //here we define the state -->super : calls the parent method on the parent class.
+        //set initial state
         super(props);
         this.state = { term: '' };
     }
     render() {
         //add event handler using es6
-        return <input onChange={event => console.log(event.target.value)} />;
+        //set a new state when it renders the class
+        //value from input is called a controlled component, it has its value set by state and chenges only when state changes
+        return (
+            <div>
+                <input
+                    value={this.state.term}
+                    onChange={event => this.setState({ term: event.target.value })} />
+
+            </div>
+        );
     }
 }
 
