@@ -1,10 +1,12 @@
 import React from 'react';
 
-
 //const VideoListItem = ({video})->es6 refactoring
+
 const VideoListItem = (props) => {
     const video = props.video;
+
     //check it on console> network
+
     const imageUrl = video.snippet.thumbnails.default.url;
     const titleVideo = video.snippet.title;
     return (
