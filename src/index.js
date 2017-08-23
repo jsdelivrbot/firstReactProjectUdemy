@@ -19,14 +19,20 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        //list of videos
+        //list of videos and selected video initial states
 
-        this.state = { videos: [] };
+        this.state = {
+            videos: [],
+            selectedVideo: null
+        };
 
-        //create and object for youtube search, second argument with a function that respons data(callback function)
+        //youtube request--> create and object for youtube search, second argument with a function that respons data(callback function), set state on video data and first selected video from the array
 
-        YTSearch({ key: API_KEY, term: 'DVA overwatch' }, (videoData) => {
-            this.setState({ videos: videoData });
+        YTSearch({ key: API_KEY, term: 'overwatch' }, (videoData) => {
+            this.setState({
+                videos: videoData,
+                selectedVideo: videoData[0]
+            });
         });
 
     }
@@ -34,8 +40,10 @@ class App extends Component {
         return (
             <div>
                 <SearchBar />
-                <VideoDetail video={this.state.videos[0]} />
-                <VideoList videos={this.state.videos} />
+                <VideoDetail video={this.state.selectedVideo} />
+                <VideoList
+                    onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+                    videos={this.state.videos} />
 
             </div>
         );

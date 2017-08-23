@@ -2,15 +2,17 @@ import React from 'react';
 
 //const VideoListItem = ({video})->es6 refactoring
 
-const VideoListItem = (props) => {
-    const video = props.video;
+const VideoListItem = ({ video, onVideoSelect }) => {
 
     //check it on console> network
 
     const imageUrl = video.snippet.thumbnails.default.url;
     const titleVideo = video.snippet.title;
+
+    //create click event on li to select the video
+
     return (
-        <li className="list-group-item">
+        <li onClick={() => onVideoSelect(video)} className="list-group-item">
             <div className="video-list media">
                 <div className="media-left">
                     <img className="media-object" src={imageUrl} />

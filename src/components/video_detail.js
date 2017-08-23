@@ -7,11 +7,11 @@ const VideoDetail = ({ video }) => {
     if (!video) {
         return <div>Loading...</div>
     }
-    const videoID = video.id.videoID;
+    const videoId = video.id.videoId;
 
     //es6 string interpolation
 
-    const url = `https://www.youtube.com/embed/${videoID}`;
+    const url = `https://www.youtube.com/embed/${videoId}`;
     return (
         <div className="video-detail col-md-8">
             <div className="embed-responsive embed-responsive-16by9">
