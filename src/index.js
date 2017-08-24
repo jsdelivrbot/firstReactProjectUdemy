@@ -25,21 +25,23 @@ class App extends Component {
             videos: [],
             selectedVideo: null
         };
+        this.videoSearch('overwatch');
+    }
 
+    videoSearch(term) {
         //youtube request--> create and object for youtube search, second argument with a function that respons data(callback function), set state on video data and first selected video from the array
-
-        YTSearch({ key: API_KEY, term: 'overwatch' }, (videoData) => {
+        YTSearch({ key: API_KEY, term: term }, (videoData) => {
             this.setState({
                 videos: videoData,
                 selectedVideo: videoData[0]
             });
         });
-
     }
+
     render() {
         return (
             <div>
-                <SearchBar />
+                <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList
                     onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
