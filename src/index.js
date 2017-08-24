@@ -1,5 +1,5 @@
 //get react and give me acces to this file import packages from node_modules
-
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -29,7 +29,9 @@ class App extends Component {
     }
 
     videoSearch(term) {
+
         //youtube request--> create and object for youtube search, second argument with a function that respons data(callback function), set state on video data and first selected video from the array
+
         YTSearch({ key: API_KEY, term: term }, (videoData) => {
             this.setState({
                 videos: videoData,
@@ -39,9 +41,13 @@ class App extends Component {
     }
 
     render() {
+
+        //_.debounce from lodash it returns a new function that can only be called once every 300 milliseconds
+
+        const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
         return (
             <div>
-                <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+                <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList
                     onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
